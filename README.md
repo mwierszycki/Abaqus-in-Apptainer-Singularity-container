@@ -25,7 +25,7 @@ Use the following commands to build the Apptainer/Singularity container:
 ```
 ~]$ sudo apptainer build abaqus-2024.sif abaqus-2024-EL7.def
 ```
-Please note that the Apptainer container with Abaqus can be run and built in rootless mode as well. Please follow the Apptainer documentation to allow an unprivileged user to build and run a container with Abaqus.
+Please note that the Apptainer container with Abaqus can be run and built in rootless mode as well. Please follow the [Apptainer documentation](https://apptainer.org/docs/admin/main/user_namespace.html) to allow an unprivileged user to build and run a container with Abaqus.
 
 To run Abaqus 2024 in the container execute the command:
 ```
