@@ -7,12 +7,12 @@ To install Apptainer on CentOS 7 you can use EPEL repository:
 ~]$ sudo yum install apptainer apptainer-suid
 ```
 Put the following files required for installation into directory ~/2024:
-* 2024.AM_SIM_Abaqus_Extend.AllOS.1-6.tar
-* 2024.AM_SIM_Abaqus_Extend.AllOS.2-6.tar
-* 2024.AM_SIM_Abaqus_Extend.AllOS.3-6.tar
-* 2024.AM_SIM_Abaqus_Extend.AllOS.4-6.tar
-* 2024.AM_SIM_Abaqus_Extend.AllOS.5-6.tar
-* 2024.AM_SIM_Abaqus_Extend.AllOS.6-6.tar
+* [2024.AM_SIM_Abaqus_Extend.AllOS.1-6.tar](https://software.3ds.com/)
+* [2024.AM_SIM_Abaqus_Extend.AllOS.2-6.tar](https://software.3ds.com/)
+* [2024.AM_SIM_Abaqus_Extend.AllOS.3-6.tar](https://software.3ds.com/)
+* [2024.AM_SIM_Abaqus_Extend.AllOS.4-6.tar](https://software.3ds.com/)
+* [2024.AM_SIM_Abaqus_Extend.AllOS.5-6.tar](https://software.3ds.com/)
+* [2024.AM_SIM_Abaqus_Extend.AllOS.6-6.tar](https://software.3ds.com/)
 * [UserIntentions_CODE.xml](https://help.3ds.com/2024/english/dssimulia_established/estiinstallmap/esti-t-autosilentinstallersuite.htm?contextscope=all)
 * [UserIntentions_CAA_Additional_426.xml](https://help.3ds.com/2024/english/dssimulia_established/estiinstallmap/esti-t-autosilentinstallersuite.htm?contextscope=all)
 * [openmpi-4.0.5-3.el8.x86_64.rpm](https://centos.pkgs.org/8-stream/centos-appstream-x86_64/openmpi-4.0.5-3.el8.x86_64.rpm.html)
