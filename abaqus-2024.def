@@ -1,0 +1,49 @@
+BootStrap: yum
+OSVersion: 8
+MirrorURL: http://dl.rockylinux.org/pub/rocky/%{OSVERSION}/BaseOS/x86_64/os/
+Include: dnf
+
+%setup
+
+    mkdir -p ${SINGULARITY_ROOTFS}/2024/
+    tar xf 2024/2024.AM_SIM_Abaqus_Extend.AllOS.1-6.tar -C ${SINGULARITY_ROOTFS}/2024/
+    tar xf 2024/2024.AM_SIM_Abaqus_Extend.AllOS.2-6.tar -C ${SINGULARITY_ROOTFS}/2024/
+    tar xf 2024/2024.AM_SIM_Abaqus_Extend.AllOS.3-6.tar -C ${SINGULARITY_ROOTFS}/2024/
+    tar xf 2024/2024.AM_SIM_Abaqus_Extend.AllOS.4-6.tar -C ${SINGULARITY_ROOTFS}/2024/
+    tar xf 2024/2024.AM_SIM_Abaqus_Extend.AllOS.5-6.tar -C ${SINGULARITY_ROOTFS}/2024/
+    tar xf 2024/2024.AM_SIM_Abaqus_Extend.AllOS.6-6.tar -C ${SINGULARITY_ROOTFS}/2024/
+    cp 2024/UserIntentions_CODE.xml ${SINGULARITY_ROOTFS}/2024/
+    cp 2024/UserIntentions_CAA_Additional_426.xml ${SINGULARITY_ROOTFS}/2024/
+    cp 2024/openmpi-4.0.5-3.el8.x86_64.rpm ${SINGULARITY_ROOTFS}/2024/
+    cp 2024/openmpi-devel-4.0.5-3.el8.x86_64.rpm ${SINGULARITY_ROOTFS}/2024/
+    cp 2024/libfabric-1.11.2-1.el8.x86_64.rpm ${SINGULARITY_ROOTFS}/2024/
+    cp 2024/oneAPI.repo ${SINGULARITY_ROOTFS}/2024/
+    cp 2024/lic.conf ${SINGULARITY_ROOTFS}/2024/
+
+%post
+
+   sed -i 's/^root:.:/root::/g' /etc/passwd
+
+   mv /2024/oneAPI.repo /etc/yum.repos.d
+
+   rpm --import https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+
+   dnf -y install zlib-devel ksh redhat-lsb-core perl intel-basekit intel-hpckit
+   
+   dnf -y install /2024/openmpi-4.0.5-3.el8.x86_64.rpm /2024/openmpi-devel-4.0.5-3.el8.x86_64.rpm /2024/libfabric-1.11.2-1.el8.x86_64.rpm
+
+   dnf clean all
+
+   for f in $(find /2024/AM_SIM_Abaqus_Extend.AllOS  -name CheckPrereq.sh | grep Linux); do chmod a+w $f; sed -i '/DSY_OS_Release=/a DSY_OS_Release="centos"' $f; chmod a-w $f; done
+
+   /2024/AM_SIM_Abaqus_Extend.AllOS/5/SIMULIA_EstablishedProducts/Linux64/1/StartTUI.sh --silent /2024/UserIntentions_CODE.xml
+   /2024/AM_SIM_Abaqus_Extend.AllOS/6/SIMULIA_EstablishedProducts_CAA_API/Linux64/1/StartTUI.sh --silent /2024/UserIntentions_CAA_Additional_426.xml
+
+   sed -i '/^\[EstablishedProducts\]/r '${SINGULARITY_ROOTFS}'/2024/lic.conf' /usr/SIMULIA/EstProducts/2024/linux_a64/SMA/site/EstablishedProductsConfig.ini
+
+   dnf -y remove perl 
+
+   rm -rf /2024/
+
+%environment
+   export PATH=$PATH:/var/DassaultSystemes/SIMULIA/Commands/
