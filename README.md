@@ -1,1 +1,1 @@
-# Abaqus-in-Apptainer-Singularity-container
+# Abaqus in Apptainer/Singularity container
