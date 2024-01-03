@@ -22,8 +22,6 @@ Include: dnf
 
 %post
 
-   sed -i 's/^root:.:/root::/g' /etc/passwd
-
    mv /2024/oneAPI.repo /etc/yum.repos.d
 
    rpm --import https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
