@@ -4,7 +4,7 @@ The Apptainer/Singularity containerization technology streamlines the containeri
 To install Apptainer on CentOS 7 you can use EPEL repository:
 ```
 ~]$ sudo yum -y install epel-release
-~]$ sudo yum install apptainer apptainer-suid
+~]$ sudo yum -y install apptainer apptainer-suid
 ```
 Put the following files required for installation into directory ~/2024:
 * [2024.AM_SIM_Abaqus_Extend.AllOS.1-6.tar](https://software.3ds.com/)
